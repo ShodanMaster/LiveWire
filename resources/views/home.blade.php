@@ -8,7 +8,8 @@
                 <div class="card-header">{{ __('Counter') }}</div>
 
                 <div class="card-body">
-                    <livewire:counter/>
+                    {{-- <livewire:counter/> --}}
+                    <livewire:product-create/>
                 </div>
             </div>
         </div>
