@@ -43,6 +43,8 @@ class ProductCreate extends Component
 
         $this->reset(['name', 'price', 'details', 'image']);
 
-        session()->flash('success', 'Form Submiited Successfully');
+        // session()->flash('success', 'Form Submiited Successfully');
+
+        return redirect()->route('success');
     }
 }
