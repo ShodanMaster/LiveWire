@@ -1,4 +1,9 @@
 <div>
+    @session('success')
+    <div class="alert alert-success">
+        <p>{{ $value}}</p>
+    </div>
+    @endsession
     <form wire:submit.prevent="submit">
         <label for="">Name</label>
         <input type="text" name="name" class="form-control" wire:model="name">

@@ -41,6 +41,8 @@ class ProductCreate extends Component
             'file_path' => $path,
         ]);
 
-         $this->reset(['name', 'price', 'details', 'image']);
+        $this->reset(['name', 'price', 'details', 'image']);
+
+        session()->flash('success', 'Form Submiited Successfully');
     }
 }
