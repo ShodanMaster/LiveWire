@@ -12,9 +12,13 @@ class Users extends Component
 
     protected $paginationTheme = "bootstrap";
 
+    public $search;
+
     public function render()
     {
-        $users = User::paginate(10);
+        $users = User::where("name", "LIKE", "%" . $this->search ."%")
+                        ->orWhere("email", "LIKE", "%" . $this->search ."%")
+                        ->paginate(10);
         return view('livewire.users', compact('users'));
     }
 }
