@@ -25,21 +25,29 @@ Route::get('success', function(){
     return response()->json(['message' => 'success']);
 })->name('success');
 
-Route::get('/insert-users', function () {
+Route::get('/insert', function () {
 
-    $users = [];
+    // $users = [];
+
+    // for ($i = 1; $i <= 100; $i++) {
+    //     $users[] = [
+    //         'name' => "User {$i}",
+    //         'email' => "user{$i}@example.com",
+    //         'password' => Illuminate\Support\Facades\Hash::make('password'),
+    //         'created_at' => now(),
+    //         'updated_at' => now(),
+    //     ];
+    // }
+
+    $categories = [];
 
     for ($i = 1; $i <= 100; $i++) {
-        $users[] = [
-            'name' => "User {$i}",
-            'email' => "user{$i}@example.com",
-            'password' => Illuminate\Support\Facades\Hash::make('password'),
-            'created_at' => now(),
-            'updated_at' => now(),
+        $categories[] = [
+            'name' => "Category {$i}",
         ];
     }
 
-    App\Models\User::insert($users);
+    App\Models\Category::insert($categories);
 
-    return '100 users inserted successfully';
+    return 'inserted successfully';
 });

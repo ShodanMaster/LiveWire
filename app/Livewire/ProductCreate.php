@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -13,7 +14,8 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $name, $price, $details, $image;
+    public $name, $price, $details, $image, $isFeatured, $featuredReason, $category;
+    public $categories = [];
 
     public function render()
     {
@@ -44,11 +46,12 @@ class ProductCreate extends Component
             'file_path' => $path,
         ]);
 
-        $this->reset(['name', 'price', 'details', 'image']);
+        $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured']);
 
         // session()->flash('success', 'Form Submiited Successfully');
+        sleep(3);
 
-        return redirect()->route('success');
+        // return redirect()->route('success');
     }
 
     public function download($filePath)
@@ -56,4 +59,11 @@ class ProductCreate extends Component
         return Storage::disk('public')->download($filePath);
     }
 
+    public function resetForm(){
+        $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured']);
+    }
+
+    public function loadCategories(){
+        $this->categories = Category::all();
+    }
 }

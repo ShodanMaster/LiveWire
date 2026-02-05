@@ -1,27 +1,68 @@
-<div>
+<div wire:init="loadCategories">
     @session('success')
     <div class="alert alert-success">
         <p>{{ $value}}</p>
     </div>
     @endsession
     <form wire:submit.prevent="submit">
+
+        <label for="category">Category</label>
+        <select name="category" id="category" wire:model="category" class="form-control">
+            <option value="">select category</option>
+            @foreach ($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+
         <label for="">Name</label>
-        <input type="text" name="name" class="form-control" wire:model="name">
+        <input type="text" name="name" class="form-control"
+        wire:model="name"
+        {{-- wire:dirty.class="is-invalid"
+        wire:dirty.class.remove="is-valid" --}}
+        {{-- wire:model.live="name" --}}
+        >
+        <p>{{$name}}</p>
         @error("name")
         <p class="text-danger">{{$message}}</p>
         @enderror
 
         <label for="">price</label>
-        <input type="text" name="price" class="form-control" wire:model="price">
+        <input type="text" name="price" class="form-control"
+        wire:model="price"
+        {{-- wire:dirty.class="is-invalid"
+        wire:dirty.class.remove="is-valid" --}}
+        {{-- wire:model.blur="price" --}}
+        >
+        <p>{{$price}}</p>
         @error("price")
         <p class="text-danger">{{$message}}</p>
         @enderror
 
         <label for="">Detail</label>
-        <textarea name="details" class="form-control" wire:model="details"></textarea>
+        <textarea name="details" class="form-control"
+        wire:model="details"
+        {{-- wire:dirty.class="is-invalid"
+        wire:dirty.class.remove="is-valid" --}}
+        ></textarea>
         @error("details")
         <p class="text-danger">{{$message}}</p>
         @enderror
+
+        <label for="isFeatured">
+            <input type="checkbox" id="isFeatured" name="isFeatured" wire:model.live="isFeatured">
+            Is Featured
+        </label><br>
+
+        @if($isFeatured)
+            <div class="mt-3" wire:transition.origin.top>
+                <label for="">featured Reason</label>
+                <textarea name="featuredReason" class="form-control"
+                wire:model="featuredReason"
+                {{-- wire:dirty.class="is-invalid"
+                wire:dirty.class.remove="is-valid" --}}
+                ></textarea>
+            </div>
+        @endif
 
         <label for="">Image</label>
         <input type="file" class="form-control" name="image" wire:model="image">
@@ -32,7 +73,12 @@
         <p class="text-danger">{{$message}}</p>
         @enderror
 
-        <button type="submit" class="btn btn-success mt-3">Submit</button>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success" wire:loading.attribute="disable">Submit</button>
+            <button type="button" class="btn btn-secondary" wire:click="resetForm">reset</button>
+            {{-- <p wire:loading>Products Loadings...</p> --}}
+        </div>
+        {{-- <div wire:dirty>Unsaved changes...</div> --}}
     </form>
     <div
         class="table-responsive mt-2"

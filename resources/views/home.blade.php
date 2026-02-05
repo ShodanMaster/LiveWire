@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     {{-- <livewire:counter/> --}}
-                    {{-- <livewire:product-create/> --}}
+                    <livewire:product-create/>
                 </div>
             </div>
         </div>

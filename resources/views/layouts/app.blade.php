@@ -52,6 +52,12 @@
                             @endif
 
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link  {{ request()->routeIs('home') ? 'active fw-bold' : '' }}" href="{{ route('home') }}" wire:navigate>{{ __('Home') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  {{ request()->routeIs('users') ? 'active fw-bold' : '' }}" href="{{ route('users') }}" wire:navigate>{{ __('Users') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -69,9 +75,7 @@
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users') }}">{{ __('Users') }}</a>
-                            </li>
+
                         @endguest
                     </ul>
                 </div>
@@ -82,7 +86,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    @livewireScripts
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-@livewireScripts
 </html>
