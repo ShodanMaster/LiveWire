@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 
 class Users extends Component
 {
@@ -12,6 +13,7 @@ class Users extends Component
 
     protected $paginationTheme = "bootstrap";
 
+    #[Url]
     public $search;
 
     public function render()
