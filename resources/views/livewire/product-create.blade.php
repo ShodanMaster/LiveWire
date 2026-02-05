@@ -34,4 +34,36 @@
 
         <button type="submit" class="btn btn-success mt-3">Submit</button>
     </form>
+    <div
+        class="table-responsive mt-2"
+    >
+        <table
+            class="table table-primary"
+        >
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Download</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr class="">
+                        <td scope="row">{{ $loop->iteration }}</td>
+                        <td>{{ $product->name}}</td>
+                        <td><img src="{{ asset( 'storage/' . $product->file_path) }}" alt="{{ $product->file_path }}" width="400px"></td>
+                        <td>
+                            @if($product->file_path)
+                                <button class="btn btn-success" wire:click="download('{{ $product->file_path }}')">Download</button>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </div>
