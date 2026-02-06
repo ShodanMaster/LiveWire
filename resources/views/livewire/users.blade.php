@@ -1,4 +1,5 @@
-<div wire:init="loadUsers"
+<div
+{{-- wire:init="loadUsers" --}}
 {{-- wire:poll.5s="loadUsers" --}}
 >
     <div>
@@ -43,7 +44,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- {{ $users->links() }} --}}
+        {{ $users->links() }}
     </div>
 
 </div>

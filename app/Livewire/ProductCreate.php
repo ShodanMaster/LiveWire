@@ -15,13 +15,15 @@ class ProductCreate extends Component
     use WithFileUploads;
 
     public $name, $price, $details, $image, $isFeatured, $featuredReason, $category;
-    public $categories = [];
+    public $categories = [], $products = [];
+
+    public function mount(){
+        $this->products = Product::latest()->get();
+    }
 
     public function render()
     {
-        return view('livewire.product-create', [
-            'products' => Product::all(),
-        ]);
+        return view('livewire.product-create');
     }
 
     public function submit(){
@@ -45,6 +47,8 @@ class ProductCreate extends Component
             'details' => $this->details,
             'file_path' => $path,
         ]);
+
+        $this->products = Product::latest()->get();
 
         $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured']);
 

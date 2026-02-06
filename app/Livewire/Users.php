@@ -13,25 +13,33 @@ class Users extends Component
 
     protected $paginationTheme = "bootstrap";
 
-    public $users = [];
+    // public $users = [];
     #[Url]
     public $search;
 
     public function render()
     {
-        // $users = User::where("name", "LIKE", "%" . $this->search ."%")
-        //                 ->orWhere("email", "LIKE", "%" . $this->search ."%")
-        //                 ->paginate(10);
-        return view('livewire.users',
-        // compact('users')
-        );
+        sleep(3);
+        $users = User::where("name", "LIKE", "%" . $this->search . "%")
+            ->orWhere("email", "LIKE", "%" . $this->search . "%")
+            ->paginate(10);
+        return view('livewire.users', compact('users'));
+    }
+
+    public function placeholder(){
+        return <<<'HTML'
+            <div class="text-cetner">
+                <img src="https://imgs.search.brave.com/OZJnCTXNV6lh_igSlIBKAxPL51UbDjOjWEDabxdtpqI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS50ZW5vci5jb20v/ZXFyODdGSDIxWGtB/QUFBbS9sb2FkaW5n/LndlYnA" width="150px">
+            </div>
+        HTML;
     }
 
     public function delete($id){
         User::find($id)->delete();
     }
 
-    public function loadUsers(){
-        $this->users = User::limit(10)->get();
-    }
+    // public function loadUsers(){
+    //     $this->users = User::limit(10)->get();
+    // }
+
 }

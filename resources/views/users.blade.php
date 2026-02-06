@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Users') }}</div>
 
                 <div class="card-body">
-                    <livewire:users>
+                    <livewire:users lazy>
                 </div>
             </div>
         </div>
