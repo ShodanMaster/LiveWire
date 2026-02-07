@@ -14,7 +14,7 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $name, $price, $details, $image, $isFeatured, $featuredReason, $category, $publishDate;
+    public $name, $price, $details, $image, $isFeatured, $featuredReason, $category, $publish_date;
     public $categories = [], $products = [];
 
     public function mount(){
@@ -32,6 +32,7 @@ class ProductCreate extends Component
             'price' => 'required|numeric|min:5',
             'details' => 'required',
             'image' => 'nullable|image',
+            'publish_date' => 'nullable|date',
         ]);
 
         $path = null;
@@ -40,20 +41,21 @@ class ProductCreate extends Component
             // stored in storage/app/public/images
             $path = $this->image->store('images', 'public');
         }
-        
+
         Product::create([
             'name' => $this->name,
             'price' => $this->price,
             'details' => $this->details,
             'file_path' => $path,
+            'publish_date' => $this->publish_date,
         ]);
 
         $this->products = Product::latest()->get();
 
-        $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured']);
+        $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured', 'publish_date']);
 
         // session()->flash('success', 'Form Submiited Successfully');
-        sleep(3);
+        // sleep(3);
 
         // return redirect()->route('success');
     }
@@ -64,7 +66,7 @@ class ProductCreate extends Component
     }
 
     public function resetForm(){
-        $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured']);
+        $this->reset(['name', 'price', 'details', 'image', 'category', 'isFeatured', publish_date]);
     }
 
     public function loadCategories(){

@@ -27,7 +27,7 @@
         @enderror
 
         <label for="">price</label>
-        <input type="text" name="price" class="form-control"
+        <input type="number" name="price" class="form-control"
         wire:model="price"
         {{-- wire:dirty.class="is-invalid"
         wire:dirty.class.remove="is-valid" --}}
@@ -75,7 +75,7 @@
 
         <label for="publich_date">Publish Date</label>
         <input type="text" name="publish_date" id="publich_date" class="form-control"
-        wire:model="publishDate">
+        wire:model="publish_date">
 
         <div class="mt-3">
             <button type="submit" class="btn btn-success" wire:loading.attribute="disable">Submit</button>
@@ -95,6 +95,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Product</th>
                     <th scope="col">Image</th>
+                    <th scope="col">Publish Date</th>
                     <th scope="col">Download</th>
 
                 </tr>
@@ -105,6 +106,7 @@
                         <td scope="row">{{ $loop->iteration }}</td>
                         <td>{{ $product->name}}</td>
                         <td><img src="{{ asset( 'storage/' . $product->file_path) }}" alt="{{ $product->file_path }}" width="400px"></td>
+                        <td>{{ $product->publish_date ?? '-'}}</td>
                         <td>
                             @if($product->file_path)
                                 <button class="btn btn-success" wire:click="download('{{ $product->file_path }}')">Download</button>
@@ -116,13 +118,13 @@
         </table>
     </div>
 
+    @script
+    <script>
+        $('#publich_date').datepicker({
+            format: 'mm/dd/yyyy',
+        }).on("changeDate", function(e){
+            @this.set("publish_date", e.format('yyyy-mm-dd'));
+        });
+    </script>
+    @endscript
 </div>
-@script
-<script>
-    $('#publich_date').datepicker({
-        format: 'mm/dd/yyyy',
-    }).on("changeDate", function(e){
-        @this.set("publis_date", e.format('yyy=mm=dd'));
-    });
-</script>
-@endscript
