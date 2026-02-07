@@ -73,6 +73,10 @@
         <p class="text-danger">{{$message}}</p>
         @enderror
 
+        <label for="publich_date">Publish Date</label>
+        <input type="text" name="publish_date" id="publich_date" class="form-control"
+        wire:model="publishDate">
+
         <div class="mt-3">
             <button type="submit" class="btn btn-success" wire:loading.attribute="disable">Submit</button>
             <button type="button" class="btn btn-secondary" wire:click="resetForm">reset</button>
@@ -113,3 +117,12 @@
     </div>
 
 </div>
+@script
+<script>
+    $('#publich_date').datepicker({
+        format: 'mm/dd/yyyy',
+    }).on("changeDate", function(e){
+        @this.set("publis_date", e.format('yyy=mm=dd'));
+    });
+</script>
+@endscript

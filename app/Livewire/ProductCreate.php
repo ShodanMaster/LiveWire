@@ -14,7 +14,7 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $name, $price, $details, $image, $isFeatured, $featuredReason, $category;
+    public $name, $price, $details, $image, $isFeatured, $featuredReason, $category, $publishDate;
     public $categories = [], $products = [];
 
     public function mount(){
@@ -40,7 +40,7 @@ class ProductCreate extends Component
             // stored in storage/app/public/images
             $path = $this->image->store('images', 'public');
         }
-
+        
         Product::create([
             'name' => $this->name,
             'price' => $this->price,
