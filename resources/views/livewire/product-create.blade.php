@@ -80,6 +80,15 @@
         <div class="mt-3">
             <button type="submit" class="btn btn-success" wire:loading.attribute="disable">Submit</button>
             <button type="button" class="btn btn-secondary" wire:click="resetForm">reset</button>
+            <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Tooltip on top">
+                Tooltip on top
+            </button>
+
             {{-- <p wire:loading>Products Loadings...</p> --}}
         </div>
         {{-- <div wire:dirty>Unsaved changes...</div> --}}
