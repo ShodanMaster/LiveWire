@@ -7,6 +7,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 
+use function Laravel\Prompts\info;
+
 class Users extends Component
 {
     use WithPagination;
@@ -34,8 +36,15 @@ class Users extends Component
         HTML;
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
+        $this->dispatchBrowserEvent('show-delete-confirmation', ['id' => $id]);
+    }
+
+    public function forceDelete($id)
+    {
         User::find($id)->delete();
+        session()->flash('message', 'User deleted successfully!');
     }
 
     // public function loadUsers(){

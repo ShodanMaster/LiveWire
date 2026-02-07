@@ -29,7 +29,8 @@
                         <td>
                             <button class="btn btn-sm btn-danger"
                                     wire:click="delete({{$user->id}})"
-                                    wire:confirm.prompt="Are you sure you want to delete this user?">
+                                    {{-- wire:confirm.prompt="Are you sure you want to delete this user?" --}}
+                                >
                                 Delete
                             </button>
                         </td>
@@ -46,5 +47,9 @@
         </table>
         {{ $users->links() }}
     </div>
-
+<script>
+    $wire.on("confirm", () =>{
+        alert();
+    });
+</script>
 </div>
